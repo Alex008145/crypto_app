@@ -5,7 +5,7 @@ import debounce from "lodash.debounce";
 
 const SearchInput = ({ handleSearch }) => {
   const [searchText, setSearchText] = useState("");
-  let { searchData } = useContext(CryptoContext);
+  let { searchData, setCoinSearch, setSearchData } = useContext(CryptoContext);
 
   let inputHandler = (e) => {
     e.preventDefault();
@@ -15,9 +15,23 @@ const SearchInput = ({ handleSearch }) => {
     handleSearch(query);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleSearch(searchText);
+  };
+
+  const selectCoin = (coin) => {
+    setCoinSearch(coin);
+    setSearchText("");
+    setSearchData();
+  };
+
   return (
     <>
-      <form className="relative flex items-center ml-7 w-96 font-nunito ">
+      <form
+        className="relative flex items-center ml-7 w-96 font-nunito"
+        onSubmit={handleSubmit}
+      >
         <input
           type="text"
           name="search"
@@ -30,13 +44,17 @@ const SearchInput = ({ handleSearch }) => {
           <FaSearch className="w-full h-auto" />
         </button>
       </form>
-      ;
-      {searchText.length > 0 ? (
-        <ul className="absolute right-0 w-full py-2 overflow-x-hidden bg-gray-200 rounded-lg top-11 h-96 bg-opacity-60 backdrop-blur-md">
-          {searchData ? (
+
+      {searchText.length === 0 ? (
+        <ul className="absolute right-0 py-2 overflow-x-hidden bg-gray-200 rounded-lg w-96 top-11 h-96 bg-opacity-60 backdrop-blur-md">
+          {false ? (
             searchData.map((coin) => {
               return (
-                <li className="flex items-center my-2 ml-4 cursor-pointer">
+                <li
+                  className="flex items-center my-2 ml-4 cursor-pointer"
+                  key={coin.id}
+                  onClick={() => selectCoin(coin.id)}
+                >
                   <img
                     className="w-[2rem] h-[2rem] mx-1.5"
                     src={coin.thumb}
@@ -47,7 +65,7 @@ const SearchInput = ({ handleSearch }) => {
               );
             })
           ) : (
-            <h2>Please wait...</h2>
+            <div className="flex items-center justify-center w-full h-full"></div>
           )}
         </ul>
       ) : null}
@@ -63,9 +81,9 @@ const Search = () => {
   }, 2000);
 
   return (
-    <>
+    <div className="relative">
       <SearchInput handleSearch={debounceFunc} />
-    </>
+    </div>
   );
 };
 
