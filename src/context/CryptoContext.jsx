@@ -14,12 +14,14 @@ export const CryptoProvider = ({ children }) => {
   const [cryptoData, setCryptoData] = useState(); // Stores the crypto data
   const [searchData, setSearchData] = useState(); // Stores the search results
   const [coinSearch, setCoinSearch] = useState(""); // Keeps track of the selected coin
+  const [currency, setCurrency] = useState("usd"); // Keeps track of the selected currency
+  const [sortBy, setSortBy] = useState("market_cap_desc"); // Keeps track of the selected sort by option
 
   // API call to get crypto data based on the selected coin
   const getCryptoData = async () => {
     try {
       const data = await fetch(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinSearch}&order=market_cap_desc&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortBy}&per_page=10&page=1&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       )
         .then((res) => res.json())
         .then((json) => json);
@@ -50,7 +52,7 @@ export const CryptoProvider = ({ children }) => {
   // Call getCryptoData on initial render and whenever coinSearch changes
   useLayoutEffect(() => {
     getCryptoData();
-  }, [coinSearch]);
+  }, [coinSearch, currency, sortBy]);
 
   // Provide the CryptoContext to its children
   return (
@@ -61,6 +63,10 @@ export const CryptoProvider = ({ children }) => {
         getSearchResult,
         setCoinSearch,
         setSearchData,
+        currency,
+        setCurrency,
+        sortBy,
+        setSortBy,
       }}
     >
       {children}

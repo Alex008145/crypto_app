@@ -12,6 +12,7 @@ module.exports = {
       cyan: "#14ffec",
       red: "#d6436e",
       green: "#25da72",
+      violet: "#6d28d9",
     },
 
     fontSize: {

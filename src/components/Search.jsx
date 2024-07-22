@@ -37,17 +37,17 @@ const SearchInput = ({ handleSearch }) => {
           name="search"
           onChange={inputHandler}
           value={searchText}
-          className="w-full pl-2 bg-gray-200 border border-transparent rounded-lg placeholder:text-gray-100 required outline-0 focus:border-cyan"
-          placeholder="search for coins..."
+          className="w-full pl-2 bg-gray-200 border border-transparent rounded-lg placeholder:text-gray-100 required outline-0 focus:border-violet"
+          placeholder="Search for coins..."
         />
         <button type="submit" className="absolute cursor-pointer right-1">
-          <FaSearch className="w-full h-auto" />
+          <FaSearch className="w-full h-auto fill-violet" />
         </button>
       </form>
 
-      {searchText.length === 0 ? (
+      {searchText.length > 0 ? (
         <ul className="absolute right-0 py-2 overflow-x-hidden bg-gray-200 rounded-lg w-96 top-11 h-96 bg-opacity-60 backdrop-blur-md">
-          {false ? (
+          {searchData ? (
             searchData.map((coin) => {
               return (
                 <li
@@ -65,7 +65,13 @@ const SearchInput = ({ handleSearch }) => {
               );
             })
           ) : (
-            <div className="flex items-center justify-center w-full h-full"></div>
+            <div className="flex items-center justify-center w-full h-full">
+              <div
+                className="w-8 h-8 border-4 rounded-full border-violet border-b-gray-200 animate-spin"
+                role="status"
+              />
+              <span className="ml-2">Searching...</span>
+            </div>
           )}
         </ul>
       ) : null}
