@@ -41,7 +41,7 @@ const SearchInput = ({ handleSearch }) => {
           placeholder="Search for coins..."
         />
         <button type="submit" className="absolute cursor-pointer right-1">
-          <FaSearch className="w-full h-auto fill-violet" />
+          <FaSearch className="w-full h-auto duration-300 ease-in-out fill-violet hover:scale-125" />
         </button>
       </form>
 

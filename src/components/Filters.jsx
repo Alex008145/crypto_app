@@ -3,9 +3,11 @@ import Search from "./Search";
 import { IoEnter } from "react-icons/io5";
 import { CryptoContext } from "../context/CryptoContext";
 import { IoIosArrowDropdown } from "react-icons/io";
+import { TbZoomReset } from "react-icons/tb";
 
 const Filters = () => {
-  let { setCurrency, currency, setSortBy } = useContext(CryptoContext);
+  let { setCurrency, currency, setSortBy, resetFunction } =
+    useContext(CryptoContext);
   const currencyRef = useRef(null);
 
   const handleCurrencySubmit = (e) => {
@@ -42,8 +44,11 @@ const Filters = () => {
             placeholder={currency.toUpperCase()}
             className="w-16 pl-2 leading-4 bg-gray-200 border border-transparent rounded-lg placeholder:text-gray-100 required outline-0 focus:border-violet"
           />
-          <button type="submit">
-            <IoEnter className="w-full h-auto ml-2 text-violet" alt="submit" />
+          <button type="submit" className="w-8 h-8">
+            <IoEnter
+              className="w-full h-auto ml-2 duration-300 ease-in-out text-violet hover:scale-125"
+              alt="submit"
+            />
           </button>
         </form>
         <label className="relative flex items-center justify-center">
@@ -68,6 +73,12 @@ const Filters = () => {
             className="absolute fill-violet w-[2rem] h-auto right-1 top-2"
           /> */}
         </label>
+        <button
+          className="w-[2rem] ml-4 hover:scale-125 transition-all transition-ease relative"
+          onClick={resetFunction}
+        >
+          <TbZoomReset className="w-full h-auto text-violet" />
+        </button>
       </div>
     </div>
   );
