@@ -46,7 +46,7 @@ const SearchInput = ({ handleSearch }) => {
       </form>
 
       {searchText.length > 0 ? (
-        <ul className="absolute right-0 py-2 overflow-x-hidden bg-gray-200 rounded-lg w-96 top-11 h-96 bg-opacity-60 backdrop-blur-md">
+        <ul className="absolute right-0 py-2 overflow-x-hidden bg-gray-200 rounded-lg w-96 top-11 h-96 bg-opacity-60 backdrop-blur-md scrollbar-thin scrollbar-thumb-violet scrollbar-track-gray-200">
           {searchData ? (
             searchData.map((coin) => {
               return (

@@ -18,6 +18,7 @@ export const CryptoProvider = ({ children }) => {
   const [sortBy, setSortBy] = useState("market_cap_desc"); // Keeps track of the selected sort by option
   const [page, setPage] = useState(1); // Keeps track of the current page
   const [totalPages, setTotalPages] = useState(250); // Keeps track of the total number of pages
+  const [perPage, setPerPage] = useState(10); // Keeps track of number of results per page
 
   // API call to get crypto data based on the selected coin
   const getCryptoData = async () => {
@@ -33,7 +34,7 @@ export const CryptoProvider = ({ children }) => {
 
     try {
       const data = await fetch(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortBy}&per_page=10&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortBy}&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d`
       )
         .then((res) => res.json())
         .then((json) => json);
@@ -69,7 +70,7 @@ export const CryptoProvider = ({ children }) => {
   // Call getCryptoData on initial render and whenever coinSearch changes
   useLayoutEffect(() => {
     getCryptoData();
-  }, [coinSearch, currency, sortBy, page]);
+  }, [coinSearch, currency, sortBy, page, perPage]);
 
   // Provide the CryptoContext to its children
   return (
@@ -88,6 +89,8 @@ export const CryptoProvider = ({ children }) => {
         setPage,
         totalPages,
         resetFunction,
+        setPerPage,
+        perPage,
       }}
     >
       {children}
