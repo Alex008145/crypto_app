@@ -21,12 +21,12 @@ const PerPage = () => {
       className="relative flex items-center mr-12 font-nunito"
       onSubmit={submitHandler}
     >
-      <label
+      <span
         htmlFor="perpage"
         className="relative flex justify-center mr-2 font-bold"
       >
         Per page:
-      </label>
+      </span>
       <input
         type="number"
         name="perpage"
