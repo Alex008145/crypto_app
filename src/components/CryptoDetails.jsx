@@ -1,8 +1,59 @@
-import React, { useContext, useLayoutEffect } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { CryptoContext } from "../context/CryptoContext";
+import { FaArrowDown, FaArrowUp } from "react-icons/fa";
 
+/**
+ * HighLowIndicator component
+ *
+ * This component takes in current price, high price and low price and renders a
+ * bar that shows the green zone (the zone where the current price is higher than
+ * the low price) and the red zone (the zone where the current price is lower than
+ * the high price).
+ *
+ * The width of the green zone is calculated based on the difference between the
+ * current price and the low price, and the width of the red zone is calculated
+ * based on the difference between the high price and the current price.
+ *
+ * The component is updated when the current price, high price or low price
+ * changes.
+ */
+const HighLowIndicator = ({ currentPrice, high, low }) => {
+  const [green, setGreen] = useState();
+
+  useEffect(() => {
+    // Calculate the width of the green zone
+    let total = high - low;
+    let greenZone = ((high - currentPrice) * 100) / total;
+    setGreen(Math.ceil(greenZone));
+  }, [currentPrice, high, low]);
+
+  return (
+    <>
+      {/* Red zone */}
+      <span
+        className="bg-red h-1.5 rounded-l-lg w-[50%]"
+        style={{ width: `${100 - green}%` }}
+      >
+        &nbsp;
+      </span>
+
+      {/* Green zone */}
+      <span
+        className="bg-green h-1.5 rounded-r-lg w-[50%]"
+        style={{ width: `${green}%` }}
+      >
+        &nbsp;
+      </span>
+    </>
+  );
+};
+
+/**
+ * CryptoDetails component displays detailed information about a cryptocurrency.
+ * It fetches the data using the CryptoContext and displays it in a modal.
+ */
 const CryptoDetails = () => {
   let { coinId } = useParams();
   let navigate = useNavigate();
@@ -10,9 +61,14 @@ const CryptoDetails = () => {
 
   useLayoutEffect(() => {
     getCoinData(coinId);
-  }, [coinId]);
+  }, [coinId, getCoinData]);
 
+  /**
+   * This function is called when the user wants to close the details modal.
+   * It uses the `navigate` function from `react-router-dom` to navigate to the parent route.
+   */
   const close = () => {
+    navigate(".."); // Navigates to the parent route
     navigate("..");
   };
 
@@ -43,8 +99,26 @@ const CryptoDetails = () => {
               <div className="flex w-full mt-6">
                 <div className="flex flex-col w-full">
                   <div className="flex justify-between">
-                    <span>Price</span>
-                    <div>
+                    <span className="text-sm text-gray-100 capitalize">
+                      Price
+                    </span>
+                    <div
+                      className={`flex items-center px-1 ml-2 text-sm font-medium uppercase bg-opacity-25 rounded-xl
+                     ${
+                       data.market_data.price_change_percentage_24h > 0
+                         ? "bg-green text-green"
+                         : "bg-red text-red"
+                     }`}
+                    >
+                      <FaArrowUp
+                        className={`w-4 h-4 mr-1 
+                        ${
+                          data.market_data.price_change_percentage_24h > 0
+                            ? "fill-green"
+                            : "fill-red rotate-180"
+                        }
+                        `}
+                      />
                       <span>
                         {Number(
                           data.market_data.price_change_percentage_24h
@@ -52,13 +126,182 @@ const CryptoDetails = () => {
                         %
                       </span>
                     </div>
-                    <h2>
-                      {new Intl.NumberFormat("en-IN", {
-                        style: "currency",
-                        currency: currency,
-                        maximumSignificantDigits: 5,
-                      }).format(data.market_data.current_price[currency])}
-                    </h2>
+                  </div>
+                  <h2 className="text-lg font-bold">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: currency,
+                      maximumSignificantDigits: 5,
+                    }).format(data.market_data.current_price[currency])}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="flex justify-between w-full mt-4">
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-100 capitalize">
+                    Market Cap
+                  </span>
+                  <h2 className="text-base font-bold">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: currency,
+                      minimumFractionDigits: 0,
+                    }).format(data.market_data.market_cap[currency])}
+                  </h2>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-100 capitalize">
+                    Fully Diluted Valuation
+                  </span>
+                  <h2 className="text-base font-bold">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: currency,
+                      notation: "compact",
+                    }).format(
+                      data.market_data.fully_diluted_valuation[currency]
+                    )}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-between w-full mt-4">
+                <span className="text-sm text-gray-100 capitalize">
+                  Total volume
+                </span>
+                <h2 className="text-base font-bold">
+                  {new Intl.NumberFormat("en-IN", {
+                    style: "currency",
+                    currency: currency,
+                    minimumFractionDigits: 0,
+                  }).format(data.market_data.total_volume[currency])}
+                </h2>
+              </div>
+
+              <div className="flex justify-between w-full mt-4">
+                <HighLowIndicator
+                  currentPrice={data.market_data.current_price[currency]}
+                  high={data.market_data.high_24h[currency]}
+                  low={data.market_data.low_24h[currency]}
+                />
+              </div>
+
+              <div className="flex justify-between w-full mt-4">
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-100 capitalize">
+                    Low 24H
+                  </span>
+                  <h2 className="text-base font-bold">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: currency,
+                      minimumFractionDigits: 5,
+                    }).format(data.market_data.low_24h[currency])}
+                  </h2>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-100 capitalize">
+                    high 24H
+                  </span>
+                  <h2 className="text-base font-bold">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: currency,
+                      minimumFractionDigits: 5,
+                    }).format(data.market_data.high_24h[currency])}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="flex justify-between w-full mt-4">
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-100 capitalize">
+                    max supply
+                  </span>
+                  <h2 className="text-base font-bold">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: currency,
+                      minimumFractionDigits: 0,
+                    }).format(data.market_data.max_supply)}
+                  </h2>
+                </div>
+
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-100 capitalize">
+                    circulating supply
+                  </span>
+                  <h2 className="text-base font-bold">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: currency,
+                      minimumFractionDigits: 0,
+                    }).format(data.market_data.circulating_supply)}
+                  </h2>
+                </div>
+              </div>
+
+              <div className="flex justify-between w-full mt-4">
+                <div className="flex flex-col">
+                  <a
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-sm text-gray-100 bg-gray-200 px-1.5 py-0.5 my-1 rounded-xl hover:scale-125 ease-in-out duration-300 hover:text-violet"
+                    href={data?.links?.homepage[0]}
+                  >
+                    {data?.links?.homepage[0].substring(8, 30)}
+                  </a>
+                  <a
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="text-sm text-gray-100 bg-gray-200 px-1.5 py-0.5 my-1 rounded-xl hover:scale-125 ease-in-out duration-300 hover:text-violet"
+                    href={data?.links?.blockchain_site[0]}
+                  >
+                    {data?.links?.blockchain_site[0].substring(8, 30)}
+                  </a>
+
+                  {data?.links?.official_forum_url[0] && (
+                    <a
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="text-sm text-gray-100 bg-gray-200 px-1.5 py-0.5 my-1 rounded-xl hover:scale-125 ease-in-out duration-300 hover:text-violet"
+                      href={data?.links?.official_forum_url[0]}
+                    >
+                      {data?.links?.official_forum_url[0].substring(8, 30)}
+                    </a>
+                  )}
+                </div>
+
+                <div className="flex flex-col content-start">
+                  <span className="ml-2 text-sm text-gray-100 capitalize">
+                    sentiment
+                  </span>
+                  <div className="flex justify-between">
+                    <div
+                      className={`flex items-center px-1 ml-2 my-1 text-sm font-medium uppercase bg-opacity-25 rounded-xl bg-green text-green`}
+                    >
+                      <FaArrowUp className="w-4 h-4 mr-1" />
+                      <span>
+                        {Number(data.sentiment_votes_up_percentage).toFixed(2)}%
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <div
+                      className={`flex items-center px-1 ml-2 my-1 text-sm font-medium uppercase bg-opacity-25 rounded-xl bg-red text-red`}
+                    >
+                      <FaArrowDown className="w-4 h-4 mr-1" />
+                      <span>
+                        {Number(data.sentiment_votes_down_percentage).toFixed(
+                          2
+                        )}
+                        %
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
