@@ -2,14 +2,19 @@ import React, { useContext, useRef } from "react";
 import Search from "./Search";
 import { IoEnter } from "react-icons/io5";
 import { CryptoContext } from "../context/CryptoContext";
-import { IoIosArrowDropdown } from "react-icons/io";
 import { TbZoomReset } from "react-icons/tb";
 
+/**
+ * Filters component is responsible for rendering the filters section of the application.
+ * It allows the user to change the currency and sort the data.
+ */
 const Filters = () => {
+  // Destructuring the values from the CryptoContext
   let { setCurrency, currency, setSortBy, resetFunction } =
     useContext(CryptoContext);
-  const currencyRef = useRef(null);
+  const currencyRef = useRef(null); // Creating a reference for the currency input field
 
+  //  Sets the currency value and clears the input field.
   const handleCurrencySubmit = (e) => {
     e.preventDefault();
     let val = currencyRef.current.value;
@@ -17,6 +22,7 @@ const Filters = () => {
     currencyRef.current.value = "";
   };
 
+  // Sets the sort value based on the selected option.
   const handleSort = (e) => {
     e.preventDefault();
     let val = e.target.value;
@@ -59,6 +65,7 @@ const Filters = () => {
             className="py-0.5 pl-2 pr-10 mr-4 text-base leading-4 capitalize bg-gray-200 border border-transparent rounded-lg focus:outline-0 focus:border-violet selected:bg-violet"
             onClick={handleSort}
           >
+            {/* Providing options for sorting the data */}
             <option value="market_cap_desc">market cap desc</option>
             <option value="market_cap_asc">market cap asc</option>
             <option value="volume_desc">volume desc</option>
@@ -68,10 +75,6 @@ const Filters = () => {
             <option value="gecko_desc">gecko desc</option>
             <option value="gecko_asc">gecko asc</option>
           </select>
-          {/* <IoIosArrowDropdown
-            alt="submit"
-            className="absolute fill-violet w-[2rem] h-auto right-1 top-2"
-          /> */}
         </label>
         <button
           className="w-[2rem] ml-4 hover:scale-125 transition-all transition-ease relative"

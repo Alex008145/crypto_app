@@ -5,6 +5,12 @@ import { CiStar } from "react-icons/ci";
 import Pagination from "./Pagination";
 import { Link } from "react-router-dom";
 
+/**
+ * TableComponent renders a table of cryptocurrencies with their respective
+ * information like name, price, total volume, and market cap change.
+ *
+ * @returns {JSX.Element} A table element with the cryptocurrency data.
+ */
 const TableComponent = () => {
   let { cryptoData, currency } = useContext(CryptoContext);
 

@@ -10,18 +10,17 @@ export const CryptoContext = createContext({});
  * It also handles the state and API calls for the app.
  */
 export const CryptoProvider = ({ children }) => {
-  // State variables
-  const [cryptoData, setCryptoData] = useState(); // Stores the crypto data
-  const [searchData, setSearchData] = useState(); // Stores the search results
+  const [cryptoData, setCryptoData] = useState();
+  const [searchData, setSearchData] = useState();
   const [coinData, setCoinData] = useState();
 
-  const [coinSearch, setCoinSearch] = useState(""); // Keeps track of the selected coin
+  const [coinSearch, setCoinSearch] = useState("");
 
-  const [currency, setCurrency] = useState("usd"); // Keeps track of the selected currency
-  const [sortBy, setSortBy] = useState("market_cap_desc"); // Keeps track of the selected sort by option
-  const [page, setPage] = useState(1); // Keeps track of the current page
-  const [totalPages, setTotalPages] = useState(250); // Keeps track of the total number of pages
-  const [perPage, setPerPage] = useState(10); // Keeps track of number of results per page
+  const [currency, setCurrency] = useState("usd");
+  const [sortBy, setSortBy] = useState("market_cap_desc");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(250);
+  const [perPage, setPerPage] = useState(10);
 
   // API call to get crypto data based on the selected coin
   const getCryptoData = async () => {

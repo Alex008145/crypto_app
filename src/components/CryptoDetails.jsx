@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { CryptoContext } from "../context/CryptoContext";
 import { FaArrowDown, FaArrowUp } from "react-icons/fa";
+import Chart from "./Chart";
 
 /**
  * HighLowIndicator component
@@ -61,7 +62,7 @@ const CryptoDetails = () => {
 
   useLayoutEffect(() => {
     getCoinData(coinId);
-  }, [coinId, getCoinData]);
+  }, [coinId]);
 
   /**
    * This function is called when the user wants to close the details modal.
@@ -306,8 +307,8 @@ const CryptoDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-[55%] h-full pl-3 bg-green">
-              Right
+            <div className="flex flex-col w-[55%] h-full pl-3">
+              <Chart id={data.id} />
             </div>
           </div>
         ) : null}
