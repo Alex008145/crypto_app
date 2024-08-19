@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { CryptoContext } from "../context/CryptoContext";
-import { FaArrowDown, FaArrowUp } from "react-icons/fa";
+import { FaArrowDown, FaArrowUp, FaTelegram } from "react-icons/fa";
 import Chart from "./Chart";
 
 /**
@@ -309,6 +309,61 @@ const CryptoDetails = () => {
             </div>
             <div className="flex flex-col w-[55%] h-full pl-3">
               <Chart id={data.id} />
+
+              <div className="flex flex-col mt-4">
+                <h3 className="py-1 text-white capitalize">
+                  <span className="mr-1 text-gray-100 capitalize">
+                    market cap rank:{" "}
+                  </span>
+                  {data.market_cap_rank}
+                </h3>
+                <h3 className="py-1 text-white capitalize">
+                  <span className="mr-1 text-gray-100 capitalize">
+                    coinGecko rank:{" "}
+                  </span>
+                  {data.market_cap_rank}
+                </h3>
+              </div>
+            </div>
+
+            <div className="absolute items-center bottom-8 right-8">
+              <a
+                href={data?.links?.repos_url?.github[0]}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                github
+              </a>
+              <a
+                href={`https://twitter.com/${data?.links?.twitter_screen_name}`}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                twitter
+              </a>
+              <a
+                href={data?.links?.subreddit_url}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                reddit
+              </a>
+              <a
+                href={`https://facebook.com/${data?.links?.facebook_username}`}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                facebook
+              </a>
+              {data.links.telegram_channel_identifier && (
+                <a
+                  href={`https://t.me/${data.links.telegram_channel_identifier}`}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <FaTelegram className="h-7 w-7" />
+                </a>
+              )}
             </div>
           </div>
         ) : null}

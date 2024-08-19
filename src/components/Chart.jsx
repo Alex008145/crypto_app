@@ -99,7 +99,7 @@ const Chart = ({ id }) => {
       <ChartComponent data={chartData} currency={currency} type={type} />
       <div className="flex">
         <button
-          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 ${
+          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded-xl capitalize ${
             type === "prices" ? "bg-violet" : "bg-gray-200 text-gray-100"
           }`}
           onClick={() => setType("prices")}
@@ -107,35 +107,45 @@ const Chart = ({ id }) => {
           Price
         </button>
         <button
-          className="text-sm py-0.5 px-1.5 ml-2"
+          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded-xl capitalize ${
+            type === "market_caps" ? "bg-violet" : "bg-gray-200 text-gray-100"
+          }`}
           onClick={() => setType("market_caps")}
         >
           Market caps
         </button>
         <button
-          className="text-sm py-0.5 px-1.5 ml-2"
+          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded-xl capitalize ${
+            type === "total_volumes" ? "bg-violet" : "bg-gray-200 text-gray-100"
+          }`}
           onClick={() => setType("total_volumes")}
         >
           Total volumes
         </button>
 
         <button
-          className="text-sm py-0.5 px-1.5 ml-2"
+          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded-xl capitalize ${
+            days === 7 ? "bg-violet" : "bg-gray-200 text-gray-100"
+          }`}
           onClick={() => setDays(7)}
         >
-          7 days
+          7d
         </button>
         <button
-          className="text-sm py-0.5 px-1.5 ml-2"
+          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded-xl capitalize ${
+            days === 14 ? "bg-violet" : "bg-gray-200 text-gray-100"
+          }`}
           onClick={() => setDays(14)}
         >
-          14 days
+          14d
         </button>
         <button
-          className="text-sm py-0.5 px-1.5 ml-2"
+          className={`text-sm py-0.5 px-1.5 ml-2 bg-opacity-25 rounded-xl capitalize ${
+            days === 30 ? "bg-violet" : "bg-gray-200 text-gray-100"
+          }`}
           onClick={() => setDays(30)}
         >
-          30 days
+          30d
         </button>
       </div>
     </div>
