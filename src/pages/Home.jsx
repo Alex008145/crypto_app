@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import Logo from "../components/Logo";
 import Navigation from "../components/Navigation";
 import { CryptoProvider } from "../context/CryptoContext";
+import { TrendingProvider } from "../context/TrendingContext";
 
 /**
  * Home component renders the main page of the application.
@@ -18,16 +19,18 @@ import { CryptoProvider } from "../context/CryptoContext";
 const Home = () => {
   return (
     <CryptoProvider>
-      <main className="relative flex flex-col items-center w-full h-full text-white first-letter:content-center font-nunito">
-        {/* Create a background for the main element */}
-        <div className="fixed w-screen h-screen bg-gray-300 -z-10"></div>
-        {/* Render the logo component */}
-        <Logo />
-        {/* Render the navigation component */}
-        <Navigation />
-        {/* Render the outlet for the routes */}
-        <Outlet />
-      </main>
+      <TrendingProvider>
+        <main className="relative flex flex-col items-center w-full h-full text-white first-letter:content-center font-nunito">
+          {/* Create a background for the main element */}
+          <div className="fixed w-screen h-screen bg-gray-300 -z-10"></div>
+          {/* Render the logo component */}
+          <Logo />
+          {/* Render the navigation component */}
+          <Navigation />
+          {/* Render the outlet for the routes */}
+          <Outlet />
+        </main>
+      </TrendingProvider>
     </CryptoProvider>
   );
 };

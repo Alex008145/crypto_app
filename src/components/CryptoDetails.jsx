@@ -2,8 +2,16 @@ import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import { CryptoContext } from "../context/CryptoContext";
-import { FaArrowDown, FaArrowUp, FaTelegram } from "react-icons/fa";
+import {
+  FaArrowDown,
+  FaArrowUp,
+  FaFacebookSquare,
+  FaGithub,
+  FaReddit,
+  FaTelegram,
+} from "react-icons/fa";
 import Chart from "./Chart";
+import { FaSquareXTwitter } from "react-icons/fa6";
 
 /**
  * HighLowIndicator component
@@ -326,42 +334,58 @@ const CryptoDetails = () => {
               </div>
             </div>
 
-            <div className="absolute items-center bottom-8 right-8">
-              <a
-                href={data?.links?.repos_url?.github[0]}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                github
-              </a>
-              <a
-                href={`https://twitter.com/${data?.links?.twitter_screen_name}`}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                twitter
-              </a>
-              <a
-                href={data?.links?.subreddit_url}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                reddit
-              </a>
-              <a
-                href={`https://facebook.com/${data?.links?.facebook_username}`}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                facebook
-              </a>
-              {data.links.telegram_channel_identifier && (
+            <div className="absolute flex items-center bottom-8 right-8">
+              {data.links.repos_url.github[0] && (
                 <a
-                  href={`https://t.me/${data.links.telegram_channel_identifier}`}
+                  href={data.links.repos_url.github[0]}
+                  className="px-2 text-lg"
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <FaTelegram className="h-7 w-7" />
+                  <FaGithub className="w-10 h-10 duration-300 ease-in-out hover:scale-125 hover:text-violet" />
+                </a>
+              )}
+
+              {data?.links?.twitter_screen_name && (
+                <a
+                  href={`https://twitter.com/${data?.links?.twitter_screen_name}`}
+                  className="px-2 text-lg"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <FaSquareXTwitter className="w-10 h-10 duration-300 ease-in-out hover:scale-125 hover:text-violet" />
+                </a>
+              )}
+              {data.links.subreddit_url && (
+                <a
+                  href={data.links.subreddit_url}
+                  className="px-2 text-lg"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <FaReddit className="w-10 h-10 duration-300 ease-in-out hover:scale-125 hover:text-violet" />
+                </a>
+              )}
+
+              {data.links.facebook_username && (
+                <a
+                  href={`https://facebook.com/${data.links.facebook_username}`}
+                  className="px-2 text-lg"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <FaFacebookSquare className="w-10 h-10 duration-300 ease-in-out hover:scale-125 hover:text-violet" />
+                </a>
+              )}
+
+              {data.links.telegram_channel_identifier && (
+                <a
+                  href={`https://t.me/${data.links.telegram_channel_identifier}`}
+                  className="px-2 text-lg"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <FaTelegram className="w-10 h-10 duration-300 ease-in-out hover:scale-125 hover:text-violet" />
                 </a>
               )}
             </div>

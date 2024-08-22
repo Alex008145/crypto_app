@@ -14,7 +14,7 @@ const Navigation = () => {
           ${
             isActive
               ? "bg-violet text-gray-300"
-              : "bg-gray-200 text-gray-100 hover:text-violet active:bg-violet active:text-gray-300 "
+              : "bg-gray-200 text-gray-100 hover:text-violet active:bg-violet active:text-gray-300"
           }`;
         }}
       >
