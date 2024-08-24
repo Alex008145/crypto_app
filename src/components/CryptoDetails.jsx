@@ -78,7 +78,6 @@ const CryptoDetails = () => {
    */
   const close = () => {
     navigate(".."); // Navigates to the parent route
-    navigate("..");
   };
 
   return ReactDOM.createPortal(
