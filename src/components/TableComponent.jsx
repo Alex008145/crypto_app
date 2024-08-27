@@ -4,6 +4,30 @@ import { CryptoContext } from "../context/CryptoContext";
 import { CiStar } from "react-icons/ci";
 import Pagination from "./Pagination";
 import { Link } from "react-router-dom";
+import { StorageContext } from "../context/StorageContext";
+
+const SaveBtn = ({ data }) => {
+  // import saved coins from local storage
+  const { saveCoin, allCoins } = useContext(StorageContext);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    saveCoin(data.id);
+  };
+
+  return (
+    <button
+      className="border-0 cursor-pointer outline-0 bg-none"
+      onClick={(e) => handleClick(e)}
+    >
+      <CiStar
+        className={`w-auto h-8 ml-2 duration-300 ease-in-out 
+          ${allCoins.includes(data.id) ? "fill-violet" : "fill-gray-100"}
+          fill-gray-100 hover:fill-violet hover:scale-125`}
+      />
+    </button>
+  );
+};
 
 /**
  * TableComponent renders a table of cryptocurrencies with their respective
@@ -39,9 +63,7 @@ const TableComponent = () => {
                     className="text-base text-center border-b border-gray-100 hover:bg-gray-200 last:border-b-0"
                   >
                     <td className="flex items-center py-4 uppercase">
-                      <button className="border-0 cursor-pointer outline-0 bg-none">
-                        <CiStar className="w-auto h-8 ml-2 duration-300 ease-in-out fill-gray-100 hover:fill-violet hover:scale-125 " />
-                      </button>
+                      <SaveBtn data={data} />
                       <img
                         src={data.image}
                         alt={data.name}
