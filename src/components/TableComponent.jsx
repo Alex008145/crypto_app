@@ -8,11 +8,18 @@ import { StorageContext } from "../context/StorageContext";
 
 const SaveBtn = ({ data }) => {
   // import saved coins from local storage
-  const { saveCoin, allCoins } = useContext(StorageContext);
+  const { saveCoin, allCoins, removeCoin } = useContext(StorageContext);
 
   const handleClick = (e) => {
     e.preventDefault();
     saveCoin(data.id);
+
+    // if coin is already saved, remove it from local storage
+    if (allCoins.includes(data.id)) {
+      removeCoin(data.id);
+    } else {
+      saveCoin(data.id);
+    }
   };
 
   return (
