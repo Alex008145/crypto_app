@@ -49,8 +49,7 @@ const Saved = () => {
   return (
     <section className="w-[80%] h-full flex flex-col mt-16 mb-24 relative border border-gray-100 rounded-xl">
       <div className="w-full min-h-[60vh]  ">
-        {/* render each coin in the trending list as a TrendingCoin component */}
-        {savedData && (
+        {savedData ? (
           <table className="w-full table-auto">
             <thead className="text-base font-medium text-gray-100 capitalize border-b border-gray-100">
               <tr>
@@ -137,6 +136,10 @@ const Saved = () => {
               })}
             </tbody>
           </table>
+        ) : (
+          <h1 className="min-h-[60vh] text-lg text-violet flex items-center justify-center">
+            No coins saved yet
+          </h1>
         )}
 
         <button

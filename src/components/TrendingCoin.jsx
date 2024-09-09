@@ -52,7 +52,15 @@ const TrendingCoin = ({ data }) => {
             className="w-[25%] h-auto p-1 rounded-full absolute top-[50%] right-5 translate-y-[-50%]"
           />
         </>
-      ) : null}
+      ) : (
+        <div className="flex items-center justify-center w-full h-full">
+          <div
+            className="w-8 h-8 border-4 rounded-full border-violet border-b-gray-200 animate-spin"
+            role="status"
+          />
+          <span className="ml-2">Loading...</span>
+        </div>
+      )}
     </div>
   );
 };

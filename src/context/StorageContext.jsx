@@ -1,4 +1,10 @@
-import { createContext, useContext, useLayoutEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import { CryptoContext } from "./CryptoContext";
 
 // create context object
@@ -12,7 +18,7 @@ export const StorageContext = createContext({});
  */
 export const StorageProvider = ({ children }) => {
   const [allCoins, setAllCoins] = useState([]);
-  const [savedData, setSavedData] = useState([]);
+  const [savedData, setSavedData] = useState();
 
   let { currency, sortBy } = useContext(CryptoContext);
 
@@ -58,6 +64,14 @@ export const StorageProvider = ({ children }) => {
   const resetSavedResult = () => {
     getSavedData();
   };
+
+  useEffect(() => {
+    if (allCoins.length > 0) {
+      getSavedData(allCoins);
+    } else {
+      setSavedData();
+    }
+  }, [allCoins]);
 
   useLayoutEffect(() => {
     let isThere = JSON.parse(localStorage.getItem("coins")) || false;

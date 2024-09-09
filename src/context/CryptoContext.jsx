@@ -24,15 +24,19 @@ export const CryptoProvider = ({ children }) => {
 
   // API call to get crypto data based on the selected coin
   const getCryptoData = async () => {
-    try {
-      const data = await fetch(`https://api.coingecko.com/api/v3/coins/list`)
-        .then((res) => res.json())
-        .then((json) => json);
+    setCryptoData();
 
-      setTotalPages(data.length);
-    } catch (error) {
-      console.log(error);
-    }
+    setTotalPages(13220);
+
+    // try {
+    //   const data = await fetch(`https://api.coingecko.com/api/v3/coins/list`)
+    //     .then((res) => res.json())
+    //     .then((json) => json);
+
+    //   setTotalPages(data.length);
+    // } catch (error) {
+    //   console.log(error);
+    // }
 
     try {
       const data = await fetch(
@@ -50,6 +54,7 @@ export const CryptoProvider = ({ children }) => {
 
   // API call to get crypto data based on the selected coin
   const getCoinData = async (coinId) => {
+    setCoinData();
     try {
       const data = await fetch(
         `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=false`

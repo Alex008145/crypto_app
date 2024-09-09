@@ -389,7 +389,15 @@ const CryptoDetails = () => {
               )}
             </div>
           </div>
-        ) : null}
+        ) : (
+          <div className="flex min-h-[60vh] items-center justify-center w-full h-full">
+            <div
+              className="w-8 h-8 border-4 rounded-full border-violet border-b-gray-200 animate-spin"
+              role="status"
+            />
+            <span className="ml-2">Loading...</span>
+          </div>
+        )}
       </div>
     </div>,
     document.getElementById("model")

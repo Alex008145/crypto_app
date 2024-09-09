@@ -57,9 +57,9 @@ const TableComponent = () => {
                 <th className="py-1">price</th>
                 <th className="py-1">total volume</th>
                 <th className="py-1">market cap change</th>
-                <th className="py-1">1H</th>
-                <th className="py-1">24H</th>
-                <th className="py-1">7D</th>
+                <th className="hidden py-1 lg:table-cell">1H</th>
+                <th className="hidden py-1 lg:table-cell">24H</th>
+                <th className="hidden py-1 lg:table-cell">7D</th>
               </tr>
             </thead>
             <tbody>
@@ -100,8 +100,8 @@ const TableComponent = () => {
                     <td
                       className={
                         data.price_change_percentage_1h_in_currency > 0
-                          ? "py-4 text-green"
-                          : "py-4 text-red"
+                          ? "py-4 text-green lg:table-cell hidden"
+                          : "py-4 text-red lg:table-cell hidden"
                       }
                     >
                       {Number(
@@ -111,8 +111,8 @@ const TableComponent = () => {
                     <td
                       className={
                         data.price_change_percentage_24h_in_currency > 0
-                          ? "py-4 text-green"
-                          : "py-4 text-red"
+                          ? "py-4 text-green lg:table-cell hidden"
+                          : "py-4 text-red lg:table-cell hidden"
                       }
                     >
                       {Number(
@@ -122,8 +122,8 @@ const TableComponent = () => {
                     <td
                       className={
                         data.price_change_percentage_7d_in_currency > 0
-                          ? "py-4 text-green"
-                          : "py-4 text-red"
+                          ? "py-4 text-green lg:table-cell hidden"
+                          : "py-4 text-red lg:table-cell hidden"
                       }
                     >
                       {Number(
@@ -135,7 +135,15 @@ const TableComponent = () => {
               })}
             </tbody>
           </table>
-        ) : null}
+        ) : (
+          <div className="flex min-h-[60vh] items-center justify-center w-full h-full">
+            <div
+              className="w-8 h-8 border-4 rounded-full border-violet border-b-gray-200 animate-spin"
+              role="status"
+            />
+            <span className="ml-2">Loading...</span>
+          </div>
+        )}
       </div>
       <div className="flex items-center justify-between mt-4 capitalize h-[2rem]">
         <span>
