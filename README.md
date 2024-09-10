@@ -1,6 +1,13 @@
 # Crypto App
 
+
+## Превью 
+https://crypto-app-alex008145s-projects.vercel.app/
+
 ## Примечание: Coingecko API имеет ограничение по запросам в минуту, поэтому приложение "ломается" при слишком частых обращениях
+
+![Main Page](https://github.com/user-attachments/assets/d7ec1a9b-4322-42a8-bdda-1601d54df3b8)
+
 
 Проект написан на React JS и Tailwind CSS
 - Для получения данных криптовалют использован Coingecko API
