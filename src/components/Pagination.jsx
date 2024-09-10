@@ -18,7 +18,7 @@ const PerPage = () => {
 
   return (
     <form
-      className="relative flex items-center mr-12 font-nunito"
+      className="absolute flex items-center mr-12 bottom-[-3.5rem] w-[12rem] md:bottom-0 md:relative sm:mt-0 font-nunito"
       onSubmit={submitHandler}
     >
       <span
@@ -83,7 +83,7 @@ const Pagination = () => {
 
   if (cryptoData && cryptoData.length >= perPage) {
     return (
-      <div className="flex items-center">
+      <div className="flex items-center justify-end ">
         <PerPage />
         <ul className="flex items-center justify-end text-sm">
           {page !== 1 ? (

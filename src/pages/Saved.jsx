@@ -56,11 +56,11 @@ const Saved = () => {
                 <th className="py-1">asset</th>
                 <th className="py-1">name</th>
                 <th className="py-1">price</th>
-                <th className="py-1">total volume</th>
-                <th className="py-1">market cap change</th>
-                <th className="py-1">1H</th>
-                <th className="py-1">24H</th>
-                <th className="py-1">7D</th>
+                <th className="hidden py-1 md:table-cell">total volume</th>
+                <th className="hidden py-1 sm:table-cell">market cap change</th>
+                <th className="hidden py-1 md:table-cell">1H</th>
+                <th className="hidden py-1 md:table-cell">24H</th>
+                <th className="hidden py-1 md:table-cell">7D</th>
               </tr>
             </thead>
             <tbody>
@@ -83,7 +83,7 @@ const Saved = () => {
                         </Link>
                       </span>
                     </td>
-                    <td className="py-4">
+                    <td className="py-4 ">
                       <Link to={`/${data.id}`} className="cursor-pointer">
                         {data.name}
                       </Link>
@@ -94,15 +94,17 @@ const Saved = () => {
                         currency: currency,
                       }).format(data.current_price)}
                     </td>
-                    <td className="py-4">{data.total_volume}</td>
-                    <td className="py-4">
+                    <td className="hidden py-4 md:table-cell">
+                      {data.total_volume}
+                    </td>
+                    <td className="hidden py-4 sm:table-cell">
                       {data.market_cap_change_percentage_24h}%
                     </td>
                     <td
                       className={
                         data.price_change_percentage_1h_in_currency > 0
-                          ? "py-4 text-green"
-                          : "py-4 text-red"
+                          ? "py-4 text-green md:table-cell hidden"
+                          : "py-4 text-red md:table-cell hidden"
                       }
                     >
                       {Number(
@@ -112,8 +114,8 @@ const Saved = () => {
                     <td
                       className={
                         data.price_change_percentage_24h_in_currency > 0
-                          ? "py-4 text-green"
-                          : "py-4 text-red"
+                          ? "py-4 text-green md:table-cell hidden"
+                          : "py-4 text-red md:table-cell hidden"
                       }
                     >
                       {Number(
@@ -123,8 +125,8 @@ const Saved = () => {
                     <td
                       className={
                         data.price_change_percentage_7d_in_currency > 0
-                          ? "py-4 text-green"
-                          : "py-4 text-red"
+                          ? "py-4 text-green md:table-cell hidden"
+                          : "py-4 text-red md:table-cell hidden"
                       }
                     >
                       {Number(

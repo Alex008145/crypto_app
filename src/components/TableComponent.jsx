@@ -55,8 +55,8 @@ const TableComponent = () => {
                 <th className="py-1">asset</th>
                 <th className="py-1">name</th>
                 <th className="py-1">price</th>
-                <th className="py-1">total volume</th>
-                <th className="py-1">market cap change</th>
+                <th className="hidden py-1 md:table-cell">total volume</th>
+                <th className="hidden py-1 sm:table-cell">market cap change</th>
                 <th className="hidden py-1 lg:table-cell">1H</th>
                 <th className="hidden py-1 lg:table-cell">24H</th>
                 <th className="hidden py-1 lg:table-cell">7D</th>
@@ -93,8 +93,10 @@ const TableComponent = () => {
                         currency: currency,
                       }).format(data.current_price)}
                     </td>
-                    <td className="py-4">{data.total_volume}</td>
-                    <td className="py-4">
+                    <td className="hidden py-4 md:table-cell">
+                      {data.total_volume}
+                    </td>
+                    <td className="hidden py-4 sm:table-cell">
                       {data.market_cap_change_percentage_24h}%
                     </td>
                     <td
@@ -145,7 +147,7 @@ const TableComponent = () => {
           </div>
         )}
       </div>
-      <div className="flex items-center justify-between mt-4 capitalize h-[2rem]">
+      <div className="flex items-center  justify-between mt-4 capitalize h-[2rem]">
         <span>
           Data provided by{" "}
           <a
@@ -157,8 +159,8 @@ const TableComponent = () => {
             CoinGecko
           </a>
         </span>
-        <Pagination />
       </div>
+      <Pagination />
     </>
   );
 };

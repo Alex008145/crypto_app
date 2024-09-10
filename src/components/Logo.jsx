@@ -12,13 +12,15 @@ const Logo = () => {
     <Link
       to="/"
       className="
-        absolute top-[1.5rem] 
+        absolute top-[1.5rem]
+        md:py-6 
         left-[1.5rem] 
         [text-decoration:none] 
         text-lg 
         text-violet
-        flex 
-        items-center 
+        flex
+        items-center
+        
         " // CSS classes for styling the Logo component
     >
       <img src={logoSvg} alt="Crypto App Logo" /> {/* Logo image */}

@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Navigation = () => {
   return (
     // Navigation bar styling
-    <nav className="w-[40%] mt-16 flex justify-around align-middle border border-violet rounded-lg ">
+    <nav className="w-[70%] md:w-[40%] mt-16 flex justify-around align-middle border border-violet rounded-lg">
       <NavLink
         to="/"
         end

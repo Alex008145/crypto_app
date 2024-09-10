@@ -30,16 +30,16 @@ const Filters = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-between w-full h-12 border-2 border-gray-100 rounded-lg">
+    <div className="items-center justify-between w-full p-5 border border-gray-100 rounded-lg h-[16vh] lg:flex relative lg:h-12">
       <Search />
-      <div className="flex mr-7">
+      <div className="lg:flex lg:mr-7">
         <form
-          className="relative flex items-center mr-12 font-nunito"
+          className="items-center mr-12 lg:flex lg:relative font-nunito"
           onSubmit={handleCurrencySubmit}
         >
           <label
             htmlFor="currency"
-            className="relative flex justify-center mr-2 font-bold"
+            className="justify-center mr-2 font-bold lg:relative lg:flex"
           >
             Currency:
           </label>
@@ -52,17 +52,17 @@ const Filters = () => {
           />
           <button type="submit" className="w-8 h-8">
             <IoEnter
-              className="w-full h-auto ml-2 duration-300 ease-in-out text-violet hover:scale-125"
+              className="w-full h-auto pt-3 ml-2 duration-300 ease-in-out lg:pt-0 text-violet hover:scale-125"
               alt="submit"
             />
           </button>
         </form>
-        <label className="relative flex items-center justify-center">
-          <span className="mr-2 font-bold">Sort by:</span>
+        <label className="items-center justify-center lg:flex lg:relative">
+          <span className="mr-2 font-bold w-[7rem]">Sort by:</span>
           <select
             name="sort"
             id="sort"
-            className="py-0.5 pl-2 pr-10 mr-4 text-base leading-4 capitalize bg-gray-200 border border-transparent rounded-lg focus:outline-0 focus:border-violet selected:bg-violet"
+            className="w-[50%] lg:w-[90%] my-2.5 py-0.5 pl-2 lg:pr-10 lg:mr-4 text-base leading-4 capitalize bg-gray-200 border border-transparent rounded-lg outline-0 focus:border-violet"
             onClick={handleSort}
           >
             {/* Providing options for sorting the data */}
@@ -77,7 +77,7 @@ const Filters = () => {
           </select>
         </label>
         <button
-          className="w-[2rem] ml-4 hover:scale-125 transition-all transition-ease relative"
+          className="absolute right-5 top-14 lg:right-0 lg:top-0 w-[2rem] ml-4 hover:scale-125 transition-all transition-ease lg:relative"
           onClick={resetFunction}
         >
           <TbZoomReset className="w-full h-auto text-violet" />
