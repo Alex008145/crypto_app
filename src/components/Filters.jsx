@@ -30,7 +30,7 @@ const Filters = () => {
   };
 
   return (
-    <div className="items-center justify-between w-full p-5 border border-gray-100 rounded-lg h-[16vh] lg:flex relative lg:h-12">
+    <div className="relative items-center justify-between w-full p-5 border border-gray-100 rounded-lg lg:flex lg:h-12">
       <Search />
       <div className="lg:flex lg:mr-7">
         <form
