@@ -82,7 +82,7 @@ const CryptoDetails = () => {
 
   return ReactDOM.createPortal(
     <div
-      className="fixed top-0 flex items-center justify-center w-full h-full bg-gray-200 backdrop-blur-sm bg-opacity-30 font-nunito"
+      className="fixed top-0 flex items-center justify-center w-full h-full bg-gray-200 backdrop-blur-sm bg-opacity-30 font-nunito "
       onClick={close}
     >
       <div
@@ -314,7 +314,7 @@ const CryptoDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col w-[55%] h-full pl-3">
+            <div className="md:flex-col w-[55%] h-full pl-3 hidden md:flex">
               <Chart id={data.id} />
 
               <div className="flex flex-col mt-4">
